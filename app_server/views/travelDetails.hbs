@@ -1,0 +1,56 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Dive Sites - Bhaccasyoniztas Beach Resort Website Template</title>
+		<link rel="stylesheet" href="../css/style.css" type="text/css" />
+		<link rel="icon" href="../images/logo.ico" />
+	</head>
+
+	<body>
+		<div id="background">
+			<div id="page">
+
+				<div id="contents">
+					<div class="box">
+						<div>
+							<div class="body">
+								<h1>Travel Details</h1>
+
+								<a class="go-back-link" href="/travel">Go back
+									to Travel page</a>
+
+								{{#if message}}
+									<p>{{message}}</p>
+								{{else}}
+									<ul id="sites">
+										{{#each trips}}
+											<li>
+												<a
+													href="/api/trips/{{this.code}}"
+												>
+													<img
+														src="../images/{{this.image}}"
+														alt="Img"
+													/>
+												</a>
+												<h2>
+													<a
+														href="/travelDetails/{{this.code}}"
+													>{{this.name}}</a>
+												</h2>
+												{{{this.description}}}
+											</li>
+										{{/each}}
+									</ul>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+
+</html>
