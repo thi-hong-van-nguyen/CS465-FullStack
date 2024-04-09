@@ -22,7 +22,31 @@ const tripsFindByCode = async (req, res) => {
 	}
 };
 
+const tripsAddTrip = async (req, res) => {
+	const { code, name, length, start, resort, perPerson, image, description } =
+		req.body;
+	const newTrip = new Trip({
+		code,
+		name,
+		length,
+		start,
+		resort,
+		perPerson,
+		image,
+		description,
+	});
+
+	const q = await newTrip.save();
+
+	if (!q) {
+		return res.status(400).json(err);
+	} else {
+		return res.status(201).json(q);
+	}
+};
+
 module.exports = {
 	tripsList,
 	tripsFindByCode,
+	tripsAddTrip,
 };
