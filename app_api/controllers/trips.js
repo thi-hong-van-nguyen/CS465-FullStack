@@ -45,8 +45,36 @@ const tripsAddTrip = async (req, res) => {
 	}
 };
 
+const tripsUpdateTrip = async (req, res) => {
+	const { code, name, length, start, resort, perPerson, image, description } =
+		req.body;
+
+	const q = await Model.findOneAndUpdate(
+		{
+			code: req.params.tripCode,
+		},
+		{
+			code,
+			name,
+			length,
+			start,
+			resort,
+			perPerson,
+			image,
+			description,
+		}
+	).exec();
+
+	if (!q) {
+		return res.status(400).json(err);
+	} else {
+		return res.status(201).json(q);
+	}
+};
+
 module.exports = {
 	tripsList,
 	tripsFindByCode,
 	tripsAddTrip,
+	tripsUpdateTrip,
 };
