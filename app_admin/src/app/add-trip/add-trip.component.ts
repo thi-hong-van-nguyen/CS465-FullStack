@@ -8,11 +8,12 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TripDataService } from '../services/trip-data.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-add-trip',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  //   standalone: true,
+  //   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-trip.component.html',
   styleUrl: './add-trip.component.css',
 })
@@ -23,7 +24,8 @@ export class AddTripComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private tripService: TripDataService
+    private tripService: TripDataService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -38,6 +40,10 @@ export class AddTripComponent implements OnInit {
       image: ['', Validators.required],
       description: ['', Validators.required],
     });
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
   }
 
   public onSubmit() {

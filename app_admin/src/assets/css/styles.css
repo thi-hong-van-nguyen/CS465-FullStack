@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar-item {
+  text-decoration: none !important;
+  font-weight: bold;
+}
+
+.signin-btn {
+  width: fit-content;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

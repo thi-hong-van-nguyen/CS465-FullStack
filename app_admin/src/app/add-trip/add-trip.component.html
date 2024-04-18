@@ -56,6 +56,10 @@
 				<div *ngIf="f['description'].errors?.['required']"> Description is required </div>
 
 			</div>
-		</div> <button type="submit" class="btn btn-info mt-3">Save</button>
+		</div>
+
+		<div *ngIf="isLoggedIn()">
+			<button type="submit" class="btn btn-info mt-3">Save</button>
+		</div>
 	</form>
 </div>

@@ -12,8 +12,8 @@ import { TripDataService } from '../services/trip-data.service';
 
 @Component({
   selector: 'app-edit-trip',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  //   standalone: true,
+  //   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './edit-trip.component.html',
   styleUrl: './edit-trip.component.css',
 })
