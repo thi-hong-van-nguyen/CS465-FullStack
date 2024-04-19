@@ -23,29 +23,6 @@ const tripsFindByCode = async (req, res) => {
 	}
 };
 
-// const tripsAddTrip = async (req, res) => {
-// 	const { code, name, length, start, resort, perPerson, image, description } =
-// 		req.body;
-// 	const newTrip = new Trip({
-// 		code,
-// 		name,
-// 		length,
-// 		start,
-// 		resort,
-// 		perPerson,
-// 		image,
-// 		description,
-// 	});
-
-// 	const q = await newTrip.save();
-
-// 	if (!q) {
-// 		return res.status(400).json(err);
-// 	} else {
-// 		return res.status(201).json(q);
-// 	}
-// };
-
 const tripsAddTrip = async (req, res) => {
 	getUser(req, res, async (req, res) => {
 		const {
@@ -79,6 +56,11 @@ const tripsAddTrip = async (req, res) => {
 				return res.status(201).json(q);
 			}
 		} catch (err) {
+			console.log(err);
+			if (err?.code === 11000)
+				return res
+					.status(400)
+					.json({ message: "Code cannot be duplicated." });
 			return res.status(400).json(err);
 		}
 	});
@@ -118,6 +100,13 @@ const tripsUpdateTrip = async (req, res) => {
 							"Trip not found with code " + req.params.tripCode,
 					});
 				}
+
+				if (err?.codeName === "DuplicateKey") {
+					return res
+						.status(400)
+						.json({ message: "Code cannot be duplicated." });
+				}
+
 				return res.status(500).json(err);
 			});
 	});

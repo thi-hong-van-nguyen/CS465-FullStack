@@ -1,13 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Trip } from '../models/trip';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-trip-card',
-  //   standalone: true,
-  //   imports: [CommonModule],
   templateUrl: './trip-card.component.html',
   styleUrl: './trip-card.component.css',
 })

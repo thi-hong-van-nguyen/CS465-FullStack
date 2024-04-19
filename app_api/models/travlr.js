@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const tripSchema = new mongoose.Schema({
 	code: {
 		type: String,
+		unique: true,
 		required: true,
 		index: true,
 	},

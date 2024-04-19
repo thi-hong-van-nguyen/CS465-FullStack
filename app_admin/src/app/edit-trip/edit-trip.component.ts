@@ -1,23 +1,16 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Trip } from '../models/trip';
 import { Router } from '@angular/router';
 import { TripDataService } from '../services/trip-data.service';
 
 @Component({
   selector: 'app-edit-trip',
-  //   standalone: true,
-  //   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './edit-trip.component.html',
   styleUrl: './edit-trip.component.css',
 })
 export class EditTripComponent implements OnInit {
+  public formError: string = '';
   public editForm!: FormGroup;
   trip!: Trip;
   submitted = false;
@@ -70,15 +63,17 @@ export class EditTripComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.formError = '';
+
     this.submitted = true;
     if (this.editForm.valid) {
       this.tripDataServive.updateTrip(this.editForm.value).subscribe({
         next: (value: any) => {
-          console.log('value onSubmit >>>', value);
           this.router.navigate(['']);
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          const errorMsg = error?.error?.message ? error?.error?.message : '';
+          this.formError = errorMsg;
         },
       });
     }

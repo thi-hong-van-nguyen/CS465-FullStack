@@ -1,23 +1,16 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TripDataService } from '../services/trip-data.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-add-trip',
-  //   standalone: true,
-  //   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-trip.component.html',
   styleUrl: './add-trip.component.css',
 })
 export class AddTripComponent implements OnInit {
+  formError = '';
   addForm!: FormGroup;
   submitted = false;
 
@@ -47,15 +40,16 @@ export class AddTripComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.formError = '';
     this.submitted = true;
     if (this.addForm.valid) {
       this.tripService.addTrip(this.addForm.value).subscribe({
         next: (data: any) => {
-          console.log(data);
           this.router.navigate(['']);
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          const errorMsg = error?.error?.message ? error?.error?.message : '';
+          this.formError = errorMsg;
         },
       });
     }

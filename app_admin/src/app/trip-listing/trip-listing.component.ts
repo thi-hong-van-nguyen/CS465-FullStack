@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { TripCardComponent } from '../trip-card/trip-card.component';
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
 import { Router } from '@angular/router';

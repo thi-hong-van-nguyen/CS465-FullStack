@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const jwt = require("express-jwt");
 const { expressjwt: expressJwt } = require("express-jwt");
 
 const auth = expressJwt({
